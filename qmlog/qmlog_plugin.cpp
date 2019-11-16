@@ -26,7 +26,7 @@
 
 void QmlogPlugin::registerTypes(const char *uri)
 {
-    // @uri io.veeso.qmlcomponents
+    // @uri QMLogger
     qmlRegisterType<QMLogger>(uri, 0, 1, "QMLogger");
 }
 

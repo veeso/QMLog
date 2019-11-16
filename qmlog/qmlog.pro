@@ -4,7 +4,7 @@ QT += qml quick
 CONFIG += plugin c++11
 
 TARGET = $$qtLibraryTarget($$TARGET)
-uri = io.veeso.qmlcomponents
+uri = QMLogger
 
 # Input
 SOURCES +=         qmlog_plugin.cpp         qmlogger.cpp

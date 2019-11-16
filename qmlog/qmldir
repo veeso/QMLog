@@ -1,2 +1,2 @@
-module io.veeso.qmlcomponents
+module QMLogger
 plugin qmlog
