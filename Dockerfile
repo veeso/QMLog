@@ -1,18 +1,9 @@
-FROM ubuntu:18.04
+FROM alpine:latest
 
-RUN apt-get update \
-  && apt-get install -y -qq --no-install-recommends \
-  cmake \
-  dpkg-dev \
-  file \
-  g++ \
-  make \
-  qt5-default \
-  qtbase5-dev \
-  qttools5-dev
+RUN apk add qt5-qtbase qt5-qtbase-dev qt5-qtdeclarative-dev qt5-qttools qt5-qttools-dev make g++
 
 WORKDIR /qmlog
 COPY qmlog .
 WORKDIR /qmlog/build
-RUN qmake .. && make && make install
+RUN qmake-qt5 .. && make && make install
 ENTRYPOINT ["/bin/bash"]

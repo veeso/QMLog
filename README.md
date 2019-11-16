@@ -4,7 +4,7 @@
 
 Developed by *Christian Visintin*
 
-Current Version 0.1.0
+Current Version 0.1.0 (16/11/2019)
 
 ---
 
