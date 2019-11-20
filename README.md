@@ -4,7 +4,7 @@
 
 Developed by *Christian Visintin*
 
-Current Version 0.1.0 (16/11/2019)
+Current Version 0.1.1 (20/11/2019)
 
 ---
 
@@ -97,6 +97,11 @@ logger.critical("Component foo", "This is a critical error message");
 ```
 
 ## Changelog
+
+### 0.1.1 (20/11/2019)
+
+- Don't log to file if file is unset
+- console changed to 'toConsole'
 
 ## License
 
