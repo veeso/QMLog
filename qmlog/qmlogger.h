@@ -48,7 +48,7 @@ class QMLogger : public QQuickItem {
   Q_PROPERTY(QString logFile READ getLogFile WRITE setLogFile)
   Q_PROPERTY(QString logFormat READ getLogFormat WRITE setLogFormat)
   Q_PROPERTY(QString dateFormat READ getDateFormat WRITE setDateFormat)
-  Q_PROPERTY(bool console READ getConsole WRITE toConsole)
+  Q_PROPERTY(bool toConsole READ getConsole WRITE toConsole)
   Q_PROPERTY(bool truncateFile READ getTruncate WRITE setTruncateFile)
 
 signals:
