@@ -57,9 +57,14 @@ QMLogger::~QMLogger() {
  */
 
 void QMLogger::log(LogLevel level, QString component, QString msg) {
-  //Check if configured log level is enabled for this log level
+    //Check if configured log level is enabled for this log level
   if (level < m_logLevel) {
     return; //Don't log
+  }
+  QString logContent;
+  if (!formatLog(component, msg, level, logContent)) {
+    logErrorSlot(LogError::BAD_FORMAT);
+    return;
   }
   if (m_toFile) {
     QFile logfilePtr(m_logFile);
@@ -72,12 +77,6 @@ void QMLogger::log(LogLevel level, QString component, QString msg) {
     }
     if (!logfilePtr.open(mode | QIODevice::WriteOnly | QIODevice::Text)) {
       logErrorSlot(LogError::WRITE_ERROR);
-      return;
-    }
-    QString logContent;
-    if (!formatLog(component, msg, level, logContent)) {
-      logfilePtr.close();
-      logErrorSlot(LogError::BAD_FORMAT);
       return;
     }
     logfilePtr.write(logContent.toUtf8());
