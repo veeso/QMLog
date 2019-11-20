@@ -61,27 +61,29 @@ void QMLogger::log(LogLevel level, QString component, QString msg) {
   if (level < m_logLevel) {
     return; //Don't log
   }
-  QFile logfilePtr(m_logFile);
-  QIODevice::OpenModeFlag mode;
-  if (m_truncate && m_firstWrite) {
-    mode = QIODevice::Truncate;
-    m_firstWrite = false;
-  } else {
-    mode = QIODevice::Append;
-  }
-  if (!logfilePtr.open(mode | QIODevice::WriteOnly | QIODevice::Text)) {
-    logErrorSlot(LogError::WRITE_ERROR);
-    return;
-  }
-  QString logContent;
-  if (!formatLog(component, msg, level, logContent)) {
+  if (m_toFile) {
+    QFile logfilePtr(m_logFile);
+    QIODevice::OpenModeFlag mode;
+    if (m_truncate && m_firstWrite) {
+      mode = QIODevice::Truncate;
+      m_firstWrite = false;
+    } else {
+      mode = QIODevice::Append;
+    }
+    if (!logfilePtr.open(mode | QIODevice::WriteOnly | QIODevice::Text)) {
+      logErrorSlot(LogError::WRITE_ERROR);
+      return;
+    }
+    QString logContent;
+    if (!formatLog(component, msg, level, logContent)) {
+      logfilePtr.close();
+      logErrorSlot(LogError::BAD_FORMAT);
+      return;
+    }
+    logfilePtr.write(logContent.toUtf8());
+    logfilePtr.write("\n");
     logfilePtr.close();
-    logErrorSlot(LogError::BAD_FORMAT);
-    return;
   }
-  logfilePtr.write(logContent.toUtf8());
-  logfilePtr.write("\n");
-  logfilePtr.close();
   if (m_toConsole) {
     qDebug() << logContent;
   }
