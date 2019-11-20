@@ -61,7 +61,7 @@ import QMLogger 0.1
 QMLogger {
   id: logger;
   logFile: "/tmp/qmlogger.log";
-  console: true;
+  toConsole: true;
   logLevel: "INFO";
   dateFormat: "yyyy-MM-dd hh:mm:ss";
   logFormat: "${DATETIME} [${LEVEL}] ${COMPONENT}: ${MESSAGE}";
@@ -73,7 +73,7 @@ QMLogger {
 ```
 
 - **logFile**: specify the log file location
-- **console**: indicates whether to log messages to console too
+- **toConsole**: indicates whether to log messages to console too
 - **logLevel**: indicates the log level ("DEBUG"/"INFO"/"WARN"/"ERROR"/"CRITICAL")
 - **dateFormat**: Indicates the date format. The date format follows the following one <https://doc.qt.io/qt-5/qdatetime.html#toString>
 - **logFormat**: The log message format. The format is made up of keywords (${}) which are replaced during the write operation. The available keywords are:
